@@ -1,0 +1,18 @@
+name: Create Static Web App Service
+on: [workflow_dispatch]
+jobs:
+createserver:
+runs-on: ubuntu-latest
+steps:
+- name: Check out Template
+uses: actions/checkout@main
+- name: Login
+uses: azure/login@v1
+with:
+creds: ${{ secrets.AZURE_CREDS }}
+- name: Deploy
+uses: azure/arm-deploy@v1
+with:
+subscriptionId: bf2938dd-da9d-4e49-af91-ea573bfb3a2d
+resourceGroupName: ARM-Build-Server-RG
+template: ./templates/createservice.json
